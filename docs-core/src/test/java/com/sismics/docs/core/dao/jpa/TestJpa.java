@@ -33,6 +33,13 @@ public class TestJpa extends BaseTransactionalTest {
         Assert.assertNotNull(user);
         Assert.assertEquals("toto@docs.com", user.getEmail());
 
+        // update user id
+        user=userDao.updatePassword(user,id);
+
+        // Search a user by his name
+        user=userDao.getActiveByUsername("username");
+        Assert.assertNotNull(user);
+        Assert.assertEquals("toto@docs.com", user.getEmail());
         // Authenticate using the database
         Assert.assertNotNull(new InternalAuthenticationHandler().authenticate("username", "12345678"));
     }
